@@ -31,22 +31,6 @@ function omdbRun() {
 //Variable to 'require' request
 var request = require("request");
 
-//Variable to hold command line arguments
-//var omdbArgs = process.argv;
-
-//Create an empty variable to hold the movie
-// var movieName = argument;
-
-//Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
-// for (var i = 2; i < omdbArgs.length; i++) {
-//   if (i > 2 && i < omdbArgs.length) {
-//     movieName = movieName + "+" + omdbArgs[i];
-//   }
-//   else {
-//     movieName += omdbArgs[i];
-//   }
-// }
-
 var queryUrl = "http://www.omdbapi.com/?t=" + argument + "&y=&plot=short&apikey=40e9cece";
 //console.log(queryUrl);
 
