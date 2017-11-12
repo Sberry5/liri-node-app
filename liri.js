@@ -1,20 +1,18 @@
-//Require keys.js folder
+//Require keys and require npm
 var keys = require('./keys.js');
 var request = require('request');
-
-/*--------Switch to run different calls depending on user input--------*/
 
 //Variables to grab user command and argument
 var command = process.argv[2];
 var argument = process.argv[3];
 var searchThis = "";
-console.log(searchThis);
 
 //Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
 for (var i = 3; i < argument.length; i++) {
   searchThis += " " + argument[i]};
 
-//var a = process.argV
+/*--------Switch to run different calls depending on user input--------*/
+
 switch(command){
 	case "movie-this":
 		omdbRun(searchThis);
