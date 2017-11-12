@@ -28,10 +28,8 @@ switch(command){
 
 /*--------Code to handle OMDB--------*/
 function omdbRun() {
-//Variable to 'require' request
-var request = require("request");
 
-var queryUrl = "http://www.omdbapi.com/?t=" + argument + "&y=&plot=short&apikey=40e9cece";
+var queryUrl = "http://www.omdbapi.com/?t=" + argument + "&y=&plot=short&apikey=" + keys.omdbKeys.apiKey;
 //console.log(queryUrl);
 
 request(queryUrl, function(error, response, body) {
@@ -41,7 +39,11 @@ request(queryUrl, function(error, response, body) {
 
 //Parse through data returned from API and show required data to user
     console.log("Title:" + JSON.parse(body).Title + "\nRelease Year: " + JSON.parse(body).Year + "\nIMDB Rating: " + JSON.parse(body).Ratings[0].Value + "\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\nCountry Produced: " + JSON.parse(body).Country + "\nLanguage: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors " + JSON.parse(body).Actors);
-	};
+	}
+
+	else {
+		console.log("Error " + error)
+	}
   });
 };
 

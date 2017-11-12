@@ -7,18 +7,29 @@ var twitterKeys = {
   access_token_secret: '5JZNlKLa7kQX2jgktKQors0VECEQVX3HSiIkTGx9tLFfm'
 };
 
+module.exports = twitterKeys;
+
 var spotifyKeys = {
 	id: '3d48aed600ff481eb891c72e504f9189',
 	secret: 'ecbfd19f20c14a4186db2917fe2f2fc0',
 };
+
+module.exports = spotifyKeys;
 
 var omdbKeys = {
 	apiKey: '40e9cece'
 };
 
 module.exports = {
-	spotifyKeys;
-	twitterKeys;
-	omdbKeys;
+	twitterKeys: twitterKeys,
+	spotifyKeys: spotifyKeys,
+	omdbKeys: omdbKeys
 }
+
+//Attempt at more efficient way to export the keys
+// module.exports = keys {
+// 	spotifyKeys;
+// 	twitterKeys;
+// 	omdbKeys;
+// }
 
