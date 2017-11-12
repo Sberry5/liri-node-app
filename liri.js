@@ -3,10 +3,21 @@ var keys = require('./keys.js');
 var request = require('request');
 
 /*--------Switch to run different calls depending on user input--------*/
-var a = process.argV
-switch(a){
+
+//Variables to grab user command and argument
+var command = process.argv[2];
+var argument = process.argv[3];
+var searchThis = "";
+console.log(searchThis);
+
+//Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
+for (var i = 3; i < argument.length; i++) {
+  searchThis += " " + argument[i]};
+
+//var a = process.argV
+switch(command){
 	case "movie-this":
-		ombdRun(argument);
+		omdbRun(searchThis);
 		break;
 	// case "my-tweets":
 	// 	twitterRun();
@@ -14,21 +25,11 @@ switch(a){
 	// case "spotify-this-song":
 	// 	spotifyRun();
 	// 	break;
-	// case default:
-	// 	console.log("Hey, jerk, you know what you are supposed to enter");
-	// 	break;
-var searchThis = []
-var command = process.argv[2];
-var argument = process.argv[3];
-//Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
-for (var i = 3; i < process.argv.length; i++) {
-  searchThis += " " + process.argv[i]};
 
 /*--------Code to handle OMDB--------*/
-
-function omdbRun(argument) {
+function omdbRun() {
 //Variable to 'require' request
-//var request = require("request");
+var request = require("request");
 
 //Variable to hold command line arguments
 //var omdbArgs = process.argv;
@@ -46,7 +47,7 @@ function omdbRun(argument) {
 //   }
 // }
 
-var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&apikey=40e9cece";
+var queryUrl = "http://www.omdbapi.com/?t=" + argument + "&y=&plot=short&apikey=40e9cece";
 //console.log(queryUrl);
 
 request(queryUrl, function(error, response, body) {
