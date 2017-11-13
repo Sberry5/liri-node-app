@@ -2,7 +2,7 @@
 var keys = require('./keys.js');
 var request = require('request');
 
-//Variables to grab user command and argument
+//Variables to grab user command and argument to be passed to each call
 var command = process.argv[2];
 var argument = process.argv[3];
 var searchThis = "";
@@ -11,18 +11,29 @@ var searchThis = "";
 for (var i = 3; i < argument.length; i++) {
   searchThis += " " + argument[i]};
 
-/*--------Switch to run different calls depending on user input--------*/
+// for (var i = 3; i < argument.length; i++) {
+//   if (i > 3 && i < argument.length) {
+//     searchThis = searchThis + "+" + argument[i];
+//   }
+//   else {
+//     searchThis += argument[i];
+//   }
+// };
 
+
+
+/*--------Switch to run different calls depending on user input--------*/
 switch(command){
 	case "movie-this":
 		omdbRun(searchThis);
 		break;
+	case "spotify-this-song":
+		spotifyRun(searchThis);
+		break;
 	// case "my-tweets":
 	// 	twitterRun();
 	// 	break;
-	// case "spotify-this-song":
-	// 	spotifyRun();
-	// 	break;
+
 
 /*--------Code to handle OMDB--------*/
 function omdbRun() {
@@ -45,38 +56,31 @@ request(queryUrl, function(error, response, body) {
   });
 };
 
-// /*--------Code to handle Twitter--------*/
-//function twitterRun(){
+/*--------Code to handle Spotify--------*/
+function spotifyRun(){
 
-// //Variable to 'require' the spotify npm
-// var Spotify = require('node-spotify-api', 'keys.js')
+//Variable to 'require' the spotify npm
+var Spotify = require('node-spotify-api')
 
+var spotify = new Spotify ({
+	 id: keys.spotifyKeys.id,
+	 secret: keys.spotifyKeys.secret
+});
+// console.log(spotifyKeys);
 
-// //Variable to hold command line arguments
-// var spotifyArgs = process.argv;
-
-// //Create an empty variable to hold the movie
-// var songName = "";
-
-// // var spotifyKeys = require('keys.js');
-// // console.log(spotifyKeys);
-
-// var spotify = new Spotify (
-// 	 'spotifyKeys'
-// );
-// // console.log(spotifyKeys);
-
-// spotify
-//   .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-//   .then(function(data) {
-//     console.log(data); 
-//   })
-//   .catch(function(err) {
-//     console.error('Error occurred: ' + err); 
-//   });
+spotify
+  .search({ type: 'track', query: 'searchThis' })
+  .then(function(response) {
+    console.log(response);
+  })
+  .catch(function(err) {
+    console.log(err);
+  });
 
 };
 
-// /*--------Code to handle Spotify--------*/
+}
 
-//function spotifyRun(){
+// /*--------Code to handle Twitter--------*/
+
+//function twitterRun(){
