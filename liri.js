@@ -35,7 +35,7 @@ switch(command){
 	// 	break;
 
 
-/*--------Code to handle OMDB--------*/
+/*--------Code to handle OMDB call--------*/
 function omdbRun() {
 
 var queryUrl = "http://www.omdbapi.com/?t=" + argument + "&y=&plot=short&apikey=" + keys.omdbKeys.apiKey;
@@ -56,8 +56,9 @@ request(queryUrl, function(error, response, body) {
   });
 };
 
-/*--------Code to handle Spotify--------*/
+/*--------Code to handle Spotify call--------*/
 function spotifyRun(){
+	console.log("spotifyfun")
 
 //Variable to 'require' the spotify npm
 var Spotify = require('node-spotify-api')
@@ -66,21 +67,27 @@ var spotify = new Spotify ({
 	 id: keys.spotifyKeys.id,
 	 secret: keys.spotifyKeys.secret
 });
-// console.log(spotifyKeys);
+ console.log(spotifyKeys);
 
-spotify
-  .search({ type: 'track', query: 'searchThis' })
-  .then(function(response) {
-    console.log(response);
-  })
-  .catch(function(err) {
-    console.log(err);
-  });
+// spotify
+//   .search({ type: 'track', query: searchThis }, function(error, data) {
+//     if(error) {
+//       console.log('Error occurred: ' + error);
+//       return;
+//     }
+//     var albumInfo = data.tracks.items[0];
+//     var spotifyResults = 
+//       "Artist: " + albumInfo.artists[0].name + "\n" +
+//       "Track Name: " + albumInfo.name + "\n" +
+//       "Album: " + albumInfo.album.name + "\n" +
+//       "Preview Link: " + albumInfo.preview_url + "\n";
+//     console.log(spotifyResults);
+  // });
 
 };
 
 }
 
-// /*--------Code to handle Twitter--------*/
+// /*--------Code to handle Twitter call--------*/
 
 //function twitterRun(){
