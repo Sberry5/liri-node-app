@@ -7,13 +7,6 @@ var command = process.argv[2];
 var argumentIn = process.argv;
 var searchThis = "";
 
-// function test(){
-// 	for (var i = 3; i < argumentIn.length; i++){
-// 	console.log(argumentIn[i]);
-// 	};
-// }
-// test();
-
 
 //Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
 
@@ -22,7 +15,7 @@ if (argumentIn.length  < 3){
 }
 else if (argumentIn.length == 3){
 	searchThis += argumentIn[i];
-	console.log(searchThis);
+	//console.log(searchThis);
 }
 else {
 	for (var i = 3; i < argumentIn.length; i++){
@@ -30,19 +23,9 @@ else {
 		//console.log(searchThis);
 	}
 }
-console.log(searchThis);
 
-// for (var i = 3; i < process.argv.length; i++) {
-//   if (i == 3 && i < process.argv.length) {
-//     searchThis += argumentIn[i];
-//       console.log("search "+ searchThis);
-//   }
-//   else {
-//     searchThis += argumentIn[i];
-//   }
-// };
 
-console.log(process.argv.length)
+//console.log(process.argv.length)
 
 /*--------Switch to run different calls depending on user input--------*/
 switch(command){
@@ -80,7 +63,7 @@ request(queryUrl, function(error, response, body) {
 
 /*--------Code to handle Spotify call--------*/
 function spotifyRun(){
-	console.log("spotifyfun")
+	//console.log("spotifyfun")
 
 //Variable to 'require' the spotify npm
 var Spotify = require('node-spotify-api');
@@ -89,8 +72,7 @@ var spotify = new Spotify ({
 	 id: keys.spotifyKeys.id,
 	 secret: keys.spotifyKeys.secret
 });
- console.log("spotifyKeys");
- console.log(searchThis);
+
 
 spotify.search({ type: 'track', query: searchThis}, function(error, data) {
     if(error) {
