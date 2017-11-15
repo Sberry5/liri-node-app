@@ -4,23 +4,45 @@ var request = require('request');
 
 //Variables to grab user command and argument to be passed to each call
 var command = process.argv[2];
-var argument = process.argv[3];
+var argumentIn = process.argv;
 var searchThis = "";
 
-//Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
-for (var i = 3; i < argument.length; i++) {
-  searchThis += " " + argument[i]};
+// function test(){
+// 	for (var i = 3; i < argumentIn.length; i++){
+// 	console.log(argumentIn[i]);
+// 	};
+// }
+// test();
 
-// for (var i = 3; i < argument.length; i++) {
-//   if (i > 3 && i < argument.length) {
-//     searchThis = searchThis + "+" + argument[i];
+
+//Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
+
+if (argumentIn.length  < 3){
+	console.log("You need to enter a name");
+}
+else if (argumentIn.length == 3){
+	spotifyRun();
+}
+else {
+	for (var i = 3; i < argumentIn.length; i++){
+		searchThis += argumentIn[i] + " ";
+		console.log(searchThis);
+		spotifyRun();
+	}
+}
+
+
+// for (var i = 3; i < process.argv.length; i++) {
+//   if (i == 3 && i < process.argv.length) {
+//     searchThis += argumentIn[i];
+//       console.log("search "+ searchThis);
 //   }
 //   else {
-//     searchThis += argument[i];
+//     searchThis += argumentIn[i];
 //   }
 // };
 
-
+console.log(process.argv.length)
 
 /*--------Switch to run different calls depending on user input--------*/
 switch(command){
@@ -61,16 +83,16 @@ function spotifyRun(){
 	console.log("spotifyfun")
 
 //Variable to 'require' the spotify npm
-var Spotify = require('node-spotify-api')
+var Spotify = require('node-spotify-api');
 
 var spotify = new Spotify ({
 	 id: keys.spotifyKeys.id,
 	 secret: keys.spotifyKeys.secret
 });
- console.log(spotifyKeys);
+ console.log("spotifyKeys");
+ console.log(searchThis);
 
-// spotify
-//   .search({ type: 'track', query: searchThis }, function(error, data) {
+// spotify.search({ type: 'track', query: searchThis}, function(error, data) {
 //     if(error) {
 //       console.log('Error occurred: ' + error);
 //       return;
@@ -82,12 +104,16 @@ var spotify = new Spotify ({
 //       "Album: " + albumInfo.album.name + "\n" +
 //       "Preview Link: " + albumInfo.preview_url + "\n";
 //     console.log(spotifyResults);
-  // });
+//   });
 
 };
 
-}
+
 
 // /*--------Code to handle Twitter call--------*/
 
 //function twitterRun(){
+
+
+//End switch cases
+}
