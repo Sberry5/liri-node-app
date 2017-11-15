@@ -1,6 +1,7 @@
 //Require keys and require npm
 var keys = require('./keys.js');
 var request = require('request');
+var Twitter = require('twitter');
 
 //Variables to grab user command and argument to be passed to each call
 var command = process.argv[2];
@@ -24,9 +25,6 @@ else {
 	}
 }
 
-
-//console.log(process.argv.length)
-
 /*--------Switch to run different calls depending on user input--------*/
 switch(command){
 	case "movie-this":
@@ -35,9 +33,9 @@ switch(command){
 	case "spotify-this-song":
 		spotifyRun(searchThis);
 		break;
-	// case "my-tweets":
-	// 	twitterRun();
-	// 	break;
+	case "my-tweets":
+		twitterRun();
+		break;
 
 
 /*--------Code to handle OMDB call--------*/
@@ -94,8 +92,28 @@ spotify.search({ type: 'track', query: searchThis}, function(error, data) {
 
 // /*--------Code to handle Twitter call--------*/
 
-//function twitterRun(){
+function twitterRun(){
+	var client = new Twitter({
+	  consumer_key: keys.twitterKeys.consumer_key,
+	  consumer_secret: keys.twitterKeys.consumer_secret,
+	  access_token_key: keys.twitterKeys.access_token_key,
+	  access_token_secret: keys.twitterKeys.access_token_secret
+	});
+	 
+	var params = {screen_name: 'SbhNWC', count:20};
+	client.get('statuses/user_timeline', params, function(error, tweets, response) {
+	  if (error) {
+	  	console.log('Error occurred: ' + error);
+	  }
 
-
+	  else{
+	  	for (var i = 0; i < tweets.length; i++) {
+			tweets[i];
+	  	console.log('\nDate created: ' + tweets[i].created_at + '\nTweet: ' + tweets[i].text)
+	  }
+};
+});
+}
 //End switch cases
+
 }
