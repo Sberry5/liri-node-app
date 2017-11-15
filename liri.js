@@ -30,7 +30,7 @@ else {
 /*--------Switch to run different calls depending on user input--------*/
 switch(command){
 	case "movie-this":
-		omdbRun(searchThis);
+		omdbRun();
 		break;
 	case "spotify-this-song":
 		spotifyRun(searchThis);
@@ -43,7 +43,7 @@ switch(command){
 /*--------Code to handle OMDB call--------*/
 function omdbRun() {
 
-var queryUrl = "http://www.omdbapi.com/?t=" + argument + "&y=&plot=short&apikey=" + keys.omdbKeys.apiKey;
+var queryUrl = "http://www.omdbapi.com/?t=" + searchThis + "&y=&plot=short&apikey=" + keys.omdbKeys.apiKey;
 //console.log(queryUrl);
 
 request(queryUrl, function(error, response, body) {
