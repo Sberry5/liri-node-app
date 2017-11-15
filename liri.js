@@ -26,7 +26,7 @@ else if (argumentIn.length == 3){
 }
 else {
 	for (var i = 3; i < argumentIn.length; i++){
-		searchThis += argumentIn[i];
+		searchThis += argumentIn[i] + " ";
 		//console.log(searchThis);
 	}
 }
@@ -92,19 +92,19 @@ var spotify = new Spotify ({
  console.log("spotifyKeys");
  console.log(searchThis);
 
-// spotify.search({ type: 'track', query: searchThis}, function(error, data) {
-//     if(error) {
-//       console.log('Error occurred: ' + error);
-//       return;
-//     }
-//     var albumInfo = data.tracks.items[0];
-//     var spotifyResults = 
-//       "Artist: " + albumInfo.artists[0].name + "\n" +
-//       "Track Name: " + albumInfo.name + "\n" +
-//       "Album: " + albumInfo.album.name + "\n" +
-//       "Preview Link: " + albumInfo.preview_url + "\n";
-//     console.log(spotifyResults);
-//   });
+spotify.search({ type: 'track', query: searchThis}, function(error, data) {
+    if(error) {
+      console.log('Error occurred: ' + error);
+      return;
+    }
+    var albumInfo = data.tracks.items[0];
+    var spotifyResults = 
+      "Artist: " + albumInfo.artists[0].name + "\n" +
+      "Track Name: " + albumInfo.name + "\n" +
+      "Album: " + albumInfo.album.name + "\n" +
+      "Preview Link: " + albumInfo.preview_url + "\n";
+    console.log(spotifyResults);
+  });
 
 };
 
