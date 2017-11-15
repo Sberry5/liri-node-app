@@ -21,16 +21,16 @@ if (argumentIn.length  < 3){
 	console.log("You need to enter a name");
 }
 else if (argumentIn.length == 3){
-	spotifyRun();
+	searchThis += argumentIn[i];
+	console.log(searchThis);
 }
 else {
 	for (var i = 3; i < argumentIn.length; i++){
-		searchThis += argumentIn[i] + " ";
-		console.log(searchThis);
-		spotifyRun();
+		searchThis += argumentIn[i];
+		//console.log(searchThis);
 	}
 }
-
+console.log(searchThis);
 
 // for (var i = 3; i < process.argv.length; i++) {
 //   if (i == 3 && i < process.argv.length) {
