@@ -7,15 +7,10 @@ var Spotify = require('node-spotify-api');
 
 
 //Variables to grab user command and argument to be passed to each call
-//Variable to grab user search
 var argumentIn = process.argv;
 var input = process.argv.splice(2);
 var command = input.shift();
-//Variable to hold user search
 var searchThis = input.join(" ");
-
-
-//Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
 
 
 /*--------Switch to run different calls depending on user input--------*/
@@ -24,7 +19,7 @@ switch(command){
 		omdbRun();
 		break;
 	case "spotify-this-song":
-		spotifyRun(searchThis);
+		spotifyRun();
 		break;
 	case "my-tweets":
 		twitterRun();
@@ -51,7 +46,8 @@ request(queryUrl, function(error, response, body) {
     	"\nIMDB Rating: " + JSON.parse(body).Ratings[0].Value + 
     	"\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + 
     	"\nCountry Produced: " + JSON.parse(body).Country + 
-    	"\nLanguage: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + 
+    	"\nLanguage: " + JSON.parse(body).Language + 
+    	"\nPlot: " + JSON.parse(body).Plot + 
     	"\nActors " + JSON.parse(body).Actors);
 	}
 
@@ -65,12 +61,14 @@ request(queryUrl, function(error, response, body) {
   });
 };
 
+
 /*--------Code to handle Spotify call--------*/
 function spotifyRun(){
 
 //Default variable for spotify
 var spotifyDefault = ""
 
+//Grab keys from key file
 var spotify = new Spotify ({
 	 id: keys.spotifyKeys.id,
 	 secret: keys.spotifyKeys.secret
@@ -95,7 +93,6 @@ spotify.search({ type: 'track', query: searchThis}, function(error, data) {
 };
 
 
-
 // /*--------Code to handle Twitter call--------*/
 
 function twitterRun(){
@@ -115,10 +112,11 @@ function twitterRun(){
 	  else{
 	  	for (var i = 0; i < tweets.length; i++) {
 			tweets[i];
-	  	console.log('\nDate created: ' + tweets[i].created_at + '\nTweet: ' + tweets[i].text)
+	  	console.log('\nDate created: ' + tweets[i].created_at + 
+	  				'\nTweet: ' + tweets[i].text)
 	  }
 	};
-});
+  });
 }
 
 /*--------Code to handle "Do what it says" command--------*/
@@ -138,9 +136,6 @@ function readFile(){
 
 //Switch searchThis with the first index from data
         searchThis = dataSplit[1];
-
-        // Console log the array
-        //console.log(data);
 
 //Call out spotify function so it gives song information
         spotifyRun();
