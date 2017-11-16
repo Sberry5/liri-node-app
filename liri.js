@@ -4,11 +4,8 @@ var request = require('request');
 var Twitter = require('twitter');
 
 //Variables to grab user command and argument to be passed to each call
-//Variable to hold user command
-//var command = process.argv[2];
 //Variable to grab user search
 var argumentIn = process.argv;
-
 var input = process.argv.splice(2);
 var command = input.shift();
 //Variable to hold user search
@@ -43,7 +40,13 @@ request(queryUrl, function(error, response, body) {
   if (!error && response.statusCode === 200) {
 
 //Parse through data returned from API and show required data to user
-    console.log("Title:" + JSON.parse(body).Title + "\nRelease Year: " + JSON.parse(body).Year + "\nIMDB Rating: " + JSON.parse(body).Ratings[0].Value + "\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + "\nCountry Produced: " + JSON.parse(body).Country + "\nLanguage: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + "\nActors " + JSON.parse(body).Actors);
+    console.log("Title:" + JSON.parse(body).Title + 
+    	"\nRelease Year: " + JSON.parse(body).Year + 
+    	"\nIMDB Rating: " + JSON.parse(body).Ratings[0].Value + 
+    	"\nRotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value + 
+    	"\nCountry Produced: " + JSON.parse(body).Country + 
+    	"\nLanguage: " + JSON.parse(body).Language + "\nPlot: " + JSON.parse(body).Plot + 
+    	"\nActors " + JSON.parse(body).Actors);
 	}
 
 	else {
@@ -107,6 +110,11 @@ function twitterRun(){
 	};
 });
 }
+
+/*--------Code to handle "Do what it says" command--------*/
+
+
+
 //End switch cases
 
 }
