@@ -4,26 +4,19 @@ var request = require('request');
 var Twitter = require('twitter');
 
 //Variables to grab user command and argument to be passed to each call
-var command = process.argv[2];
+//Variable to hold user command
+//var command = process.argv[2];
+//Variable to grab user search
 var argumentIn = process.argv;
-var searchThis = "";
+
+var input = process.argv.splice(2);
+var command = input.shift();
+//Variable to hold user search
+var searchThis = input.join(" ");
 
 
 //Loop through user input to grab the movie name. Code allows users to input multi-word movie names.
 
-if (argumentIn.length  < 3){
-	console.log("You need to enter a name");
-}
-else if (argumentIn.length == 3){
-	searchThis += argumentIn[i];
-	//console.log(searchThis);
-}
-else {
-	for (var i = 3; i < argumentIn.length; i++){
-		searchThis += argumentIn[i] + " ";
-		//console.log(searchThis);
-	}
-}
 
 /*--------Switch to run different calls depending on user input--------*/
 switch(command){
@@ -111,7 +104,7 @@ function twitterRun(){
 			tweets[i];
 	  	console.log('\nDate created: ' + tweets[i].created_at + '\nTweet: ' + tweets[i].text)
 	  }
-};
+	};
 });
 }
 //End switch cases
