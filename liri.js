@@ -2,6 +2,9 @@
 var keys = require('./keys.js');
 var request = require('request');
 var Twitter = require('twitter');
+var fs = require('fs');
+var Spotify = require('node-spotify-api');
+
 
 //Variables to grab user command and argument to be passed to each call
 //Variable to grab user search
@@ -26,6 +29,9 @@ switch(command){
 	case "my-tweets":
 		twitterRun();
 		break;
+	case "do-what-it-says":
+		readFile();
+		break;
 
 
 /*--------Code to handle OMDB call--------*/
@@ -49,6 +55,10 @@ request(queryUrl, function(error, response, body) {
     	"\nActors " + JSON.parse(body).Actors);
 	}
 
+	// else if(searchThis === "") {
+	// 	searchThis += ";
+	// }
+
 	else {
 		console.log("Error " + error)
 	}
@@ -57,10 +67,9 @@ request(queryUrl, function(error, response, body) {
 
 /*--------Code to handle Spotify call--------*/
 function spotifyRun(){
-	//console.log("spotifyfun")
 
-//Variable to 'require' the spotify npm
-var Spotify = require('node-spotify-api');
+//Default variable for spotify
+var spotifyDefault = ""
 
 var spotify = new Spotify ({
 	 id: keys.spotifyKeys.id,
@@ -73,6 +82,7 @@ spotify.search({ type: 'track', query: searchThis}, function(error, data) {
       console.log('Error occurred: ' + error);
       return;
     }
+
     var albumInfo = data.tracks.items[0];
     var spotifyResults = 
       "Artist: " + albumInfo.artists[0].name + "\n" +
@@ -113,8 +123,32 @@ function twitterRun(){
 
 /*--------Code to handle "Do what it says" command--------*/
 
+function readFile(){
 
+//Use fs to read the random.txt file
+    fs.readFile("random.txt", "utf8", function (err, data) {
 
-//End switch cases
+//Console.log any error received
+        if (err) {
+            return console.log(err);
+        }
+
+//Split the data in random.txt by commas
+        var dataSplit = data.split(",");
+
+//Switch searchThis with the first index from data
+        searchThis = dataSplit[1];
+
+        // Console log the array
+        //console.log(data);
+
+//Call out spotify function so it gives song information
+        spotifyRun();
+
+    });
 
 }
+
+//End switch case
+}
+
